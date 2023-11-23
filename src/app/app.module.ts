@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
+import { TemplateDrivenFormsModule } from 'src/app/template-driven-forms/template-driven-forms.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    TemplateDrivenFormsModule,
   ],
-  providers: [],
+  declarations: [
+    AppComponent,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
