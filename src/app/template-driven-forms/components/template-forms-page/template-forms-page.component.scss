@@ -1,0 +1,32 @@
+.ng-invalid.ng-dirty:not([ngModelGroup="address"]):not(form) {
+  border: 2px solid red;
+}
+
+.ng-valid:not([ngModelGroup]):not(form) {
+  border: 2px solid green;
+}
+
+@keyframes message-animation {
+  from {
+    opacity: 0;
+    transform: translate(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.error-message {
+  color: red;
+
+  animation-name: message-animation;
+  animation-duration: 300ms;
+}
+
+.info-message {
+  color: darkorange;
+
+  animation-name: message-animation;
+  animation-duration: 300ms;
+}
