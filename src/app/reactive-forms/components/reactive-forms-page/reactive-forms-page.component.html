@@ -1,0 +1,236 @@
+<form [formGroup]="myForm" (reset)="onReset($event)" (ngSubmit)="onSubmit($event)" class="form">
+  <div class="form-field">
+    <label for="name">First Name</label>
+    <input formControlName="firstName" type="text" id="name" placeholder="Enter your name">
+    <ng-container *ngIf="myForm.controls.firstName as firstName">
+      <div
+        *ngIf="firstName.dirty && firstName.hasError('required')"
+        class="input-error">
+        This field is required
+      </div>
+      <div
+        *ngIf="firstName.dirty && firstName.hasError('minlength')"
+        class="input-error">
+        The length must be at least <strong>{{ firstName.getError('minlength').requiredLength }}</strong> characters.
+      </div>
+      <div
+        *ngIf="firstName.dirty && firstName.hasError('banWords')"
+        class="input-error">
+        The word <strong>{{ firstName.getError('banWords').bannedWord }}</strong> is not allowed.
+      </div>
+    </ng-container>
+  </div>
+  <div class="form-field">
+    <label for="last-name">Last Name</label>
+    <input formControlName="lastName" type="text" id="last-name" placeholder="Enter your last name">
+    <ng-container *ngIf="myForm.controls.lastName as lastName">
+      <div
+        *ngIf="lastName.dirty && lastName.hasError('required')"
+        class="input-error">
+        This field is required
+      </div>
+      <div
+        *ngIf="lastName.dirty && lastName.hasError('minlength')"
+        class="input-error">
+        The length must be at least <strong>{{ lastName.getError('minlength').requiredLength }}</strong> characters.
+      </div>
+      <div
+        *ngIf="lastName.dirty && lastName.hasError('banWords')"
+        class="input-error">
+        The word <strong>{{ lastName.getError('banWords').bannedWord }}</strong> is not allowed.
+      </div>
+    </ng-container>
+  </div>
+  <div class="form-field">
+    <label for="nick-name">Nick Name</label>
+    <input formControlName="nickName" type="text" id="nick-name" placeholder="Come up with a nick name">
+    <ng-container *ngIf="myForm.controls.nickName as nickName">
+      <div
+        *ngIf="nickName.dirty && nickName.hasError('required')"
+        class="input-error">
+        This field is required
+      </div>
+      <div
+        *ngIf="nickName.dirty && nickName.hasError('minlength')"
+        class="input-error">
+        The length must be at least <strong>{{ nickName.getError('minlength').requiredLength }}</strong> characters.
+      </div>
+      <div
+        *ngIf="nickName.dirty && nickName.hasError('pattern')"
+        class="input-error">
+        The format of the Nick name is incorrect.
+      </div>
+      <div
+        *ngIf="nickName.dirty && nickName.hasError('banWords')"
+        class="input-error">
+        The word <strong>{{ nickName.getError('banWords').bannedWord }}</strong> is not allowed.
+      </div>
+      <div
+        *ngIf="nickName.dirty && nickName.hasError('uniqueName')"
+        class="input-error">
+        The Nick name <strong>{{ nickName.value }}</strong> is already taken.
+      </div>
+      <div
+        *ngIf="nickName.pending"
+        class="input-info">
+        Checking nick name...
+      </div>
+    </ng-container>
+  </div>
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" id="email" placeholder="Provide your email">
+    <ng-container *ngIf="myForm.controls.email as email">
+      <div
+        *ngIf="email.dirty && email.hasError('required')"
+        class="input-error">
+        This field is required
+      </div>
+      <div
+        *ngIf="email.dirty && email.hasError('email')"
+        class="input-error">
+        Invalid e-mail format
+      </div>
+    </ng-container>
+  </div>
+  <div class="form-field-inline-group">
+    <div class="form-field form-field--small">
+      <label for="year-of-birth">Year of birth</label>
+      <select formControlName="yearOfBirth" id="year-of-birth">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+      <ng-container *ngIf="myForm.controls.yearOfBirth as yearOfBirth">
+        <div
+          *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-field form-field--small">
+      <label for="passport">Passport Number</label>
+      <input formControlName="passport" type="text" id="passport" placeholder="Provide Passport Data">
+      <ng-container *ngIf="myForm.controls.passport as passport">
+        <div
+          *ngIf="passport.dirty && passport.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+        <div
+          *ngIf="passport.dirty && passport.hasError('pattern')"
+          class="input-error">
+          Incorrect passport format
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <fieldset formGroupName="address">
+    <legend>Address</legend>
+    <div class="form-field">
+      <label for="full-address">Full Address</label>
+      <input formControlName="fullAddress" type="text" id="full-address" placeholder="Street name and house number">
+      <ng-container *ngIf="myForm.controls.address.controls.fullAddress as fullAddress">
+        <div
+          *ngIf="fullAddress.dirty && fullAddress.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-field">
+      <label for="city">City</label>
+      <input formControlName="city" type="text" id="city" placeholder="City">
+      <ng-container *ngIf="myForm.controls.address.controls.city as city">
+        <div
+          *ngIf="city.dirty && city.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+      </ng-container>
+    </div>
+    <div class="form-field">
+      <label for="post-code">Post Code</label>
+      <input formControlName="postCode" type="number" id="post-code" placeholder="Post code">
+      <ng-container *ngIf="myForm.controls.address.controls.postCode as postCode">
+        <div
+          *ngIf="postCode.dirty && postCode.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+      </ng-container>
+    </div>
+  </fieldset>
+
+  <fieldset class="phones-fieldset" formArrayName="phones">
+    <legend>Phones</legend>
+
+    <div>
+      <button (click)="addPhone()" type="button">Add Phone</button>
+    </div>
+
+    <div
+      *ngFor="let phone of myForm.controls.phones.controls, let index = index"
+      class="phone-form"
+      [formGroupName]="index">
+      <label for="phone-{{ index }}">Phone number</label>
+      <select formControlName="label">
+        <option *ngFor="let label of phoneLabels" [value]="label">{{ label }}</option>
+      </select>
+      <input formControlName="phone" type="text" name="" id="phone-{{ index }}" placeholder="Enter Phone Number">
+      <button (click)="removePhone(index)" type="button">X</button>
+    </div>
+
+  </fieldset>
+
+  <fieldset formGroupName="skills">
+    <legend>User skills</legend>
+    <ng-container *ngIf="skills$ | async as skills; else loading">
+      <div *ngFor="let skill of skills">
+        <input [formControlName]="skill" type="checkbox" [id]="skill">
+        <label [for]="skill">{{ skill | titlecase }}</label>
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+      <span class="loading">Loading...</span>
+    </ng-template>
+  </fieldset>
+
+  <fieldset formGroupName="password">
+    <legend>Password</legend>
+
+    <div>
+      <label for="password">Password</label>
+      <input formControlName="password" id="password" type="password">
+      <ng-container *ngIf="myForm.controls.password.controls.password as password">
+        <div
+          *ngIf="password.dirty && password.hasError('required')"
+          class="input-error">
+          This field is required
+        </div>
+        <div
+          *ngIf="password.dirty && password.hasError('minlength')"
+          class="input-error">
+          The length must be at least <strong>{{ password.getError('minlength').requiredLength }}</strong> characters.
+        </div>
+      </ng-container>
+    </div>
+
+    <div>
+      <label for="confirm-password">Confirm Password</label>
+      <input formControlName="confirmPassword" id="confirm-password" type="password">
+    </div>
+
+    <ng-container *ngIf="myForm.controls.password.controls.confirmPassword as confirmPassword">
+      <div
+        *ngIf="confirmPassword.dirty && confirmPassword.hasError('passwordMustMatch')"
+        class="input-error">
+        Passwords must match!
+      </div>
+    </ng-container>
+  </fieldset>
+
+  <button [disabled]="myForm.invalid || myForm.pending">Save</button>
+  <button type="reset" [disabled]="myForm.pristine">Reset</button>
+</form>
+
