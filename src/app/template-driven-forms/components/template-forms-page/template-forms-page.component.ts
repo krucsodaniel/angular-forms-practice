@@ -30,7 +30,7 @@ export class TemplateFormsPageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     queueMicrotask(() => {
-      this.initialFormValues = this.formDir.value;
+      this.initialFormValues = this.formDir?.value;
     })
   }
 

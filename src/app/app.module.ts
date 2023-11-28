@@ -5,6 +5,7 @@ import { TemplateDrivenFormsModule } from 'src/app/template-driven-forms/templat
 import { ReactiveModule } from './reactive-forms/reactive.module';
 import { SearchbarComponent } from './components';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessorModule } from './control-value-accessor/control-value-accessor.module';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TemplateDrivenFormsModule,
     ReactiveModule,
     ReactiveFormsModule,
+    ControlValueAccessorModule,
   ],
   declarations: [
     AppComponent,

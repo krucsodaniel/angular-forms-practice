@@ -1,222 +1,222 @@
-<form #form="ngForm" class="form" (reset)="onReset($event)" (ngSubmit)="onSubmitForm()">
-  <div class="form-field">
-    <label for="name">First Name</label>
-    <input
-      [(ngModel)]="userInfo.firstName"
-      #firstName="ngModel"
-      [appBanWords]="isAdult ? ['test', 'admin'] : []"
-      name="first-name"
-      type="text"
-      id="name"
-      placeholder="Enter your name"
-      minlength="3"
-      required>
-    <div
-      *ngIf="firstName.dirty && firstName.hasError('required')"
-      class="error-message">
-      This field is required
-    </div>
-    <div
-      *ngIf="firstName.dirty && firstName.hasError('minlength')"
-      class="error-message">
-      Firstname should be at least <strong>{{ firstName.getError('minlength').requiredLength }}</strong> characters
-    </div>
-    <div
-      *ngIf="firstName.dirty && firstName.hasError('appBanWords')"
-      class="error-message">
-      The word <strong>{{ firstName.getError('appBanWords').bannedWord }}</strong> is not permitted!
-    </div>
-  </div>
-  <div class="form-field">
-    <label for="last-name">Last Name</label>
-    <input
-      [(ngModel)]="userInfo.lastName"
-      #lastName="ngModel"
-      name="last-name"
-      type="text"
-      id="last-name"
-      placeholder="Enter your last name"
-      minlength="3"
-      required>
-    <div
-      *ngIf="lastName.dirty && lastName.hasError('required')"
-      class="error-message">
-      This field is required
-    </div>
-    <div
-      *ngIf="firstName.dirty && lastName.hasError('minlength')"
-      class="error-message">
-      Firstname should be at least <strong>{{ lastName.getError('minlength').requiredLength }}</strong> characters
-    </div>
-  </div>
-  <div class="form-field">
-    <label for="nick-name">Nick Name</label>
-    <input
-      [(ngModel)]="userInfo.nickName"
-      [ngModelOptions]="{ updateOn: 'blur' }"
-      appUniqueNickname
-      #nickName="ngModel"
-      name="nick-name"
-      type="text"
-      id="nick-name"
-      placeholder="Come up with a nick name"
-      minlength="2"
-      pattern="^[\w.]+$"
-      required>
+<!--<form #form="ngForm" class="form" (reset)="onReset($event)" (ngSubmit)="onSubmitForm()">-->
+<!--  <div class="form-field">-->
+<!--    <label for="name">First Name</label>-->
+<!--    <input-->
+<!--      [(ngModel)]="userInfo.firstName"-->
+<!--      #firstName="ngModel"-->
+<!--      [appBanWords]="isAdult ? ['test', 'admin'] : []"-->
+<!--      name="first-name"-->
+<!--      type="text"-->
+<!--      id="name"-->
+<!--      placeholder="Enter your name"-->
+<!--      minlength="3"-->
+<!--      required>-->
+<!--    <div-->
+<!--      *ngIf="firstName.dirty && firstName.hasError('required')"-->
+<!--      class="error-message">-->
+<!--      This field is required-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="firstName.dirty && firstName.hasError('minlength')"-->
+<!--      class="error-message">-->
+<!--      Firstname should be at least <strong>{{ firstName.getError('minlength').requiredLength }}</strong> characters-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="firstName.dirty && firstName.hasError('appBanWords')"-->
+<!--      class="error-message">-->
+<!--      The word <strong>{{ firstName.getError('appBanWords').bannedWord }}</strong> is not permitted!-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form-field">-->
+<!--    <label for="last-name">Last Name</label>-->
+<!--    <input-->
+<!--      [(ngModel)]="userInfo.lastName"-->
+<!--      #lastName="ngModel"-->
+<!--      name="last-name"-->
+<!--      type="text"-->
+<!--      id="last-name"-->
+<!--      placeholder="Enter your last name"-->
+<!--      minlength="3"-->
+<!--      required>-->
+<!--    <div-->
+<!--      *ngIf="lastName.dirty && lastName.hasError('required')"-->
+<!--      class="error-message">-->
+<!--      This field is required-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="firstName.dirty && lastName.hasError('minlength')"-->
+<!--      class="error-message">-->
+<!--      Firstname should be at least <strong>{{ lastName.getError('minlength').requiredLength }}</strong> characters-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form-field">-->
+<!--    <label for="nick-name">Nick Name</label>-->
+<!--    <input-->
+<!--      [(ngModel)]="userInfo.nickName"-->
+<!--      [ngModelOptions]="{ updateOn: 'blur' }"-->
+<!--      appUniqueNickname-->
+<!--      #nickName="ngModel"-->
+<!--      name="nick-name"-->
+<!--      type="text"-->
+<!--      id="nick-name"-->
+<!--      placeholder="Come up with a nick name"-->
+<!--      minlength="2"-->
+<!--      pattern="^[\w.]+$"-->
+<!--      required>-->
 
-    <div
-      *ngIf="nickName.pending"
-      class="info-message">
-      Checking...
-    </div>
-    <div
-      *ngIf="nickName.dirty && nickName.hasError('uniqueNameError')"
-      class="error-message">
-      Username is taken
-    </div>
-  </div>
-  <div class="form-field">
-    <label for="email">Email</label>
-    <input
-      [(ngModel)]="userInfo.email"
-      #email="ngModel"
-      name="email"
-      type="email"
-      id="email"
-      placeholder="Provide your email"
-      email>
-    <div
-      *ngIf="email.touched && email.hasError('email')"
-      class="error-message">
-      Invalid e-mail
-    </div>
-  </div>
-  <div class="form-field-inline-group">
-    <div class="form-field form-field--small">
-      <label for="year-of-birth">Year of birth</label>
-      <select
-        [(ngModel)]="userInfo.yearOfBirth"
-        #yearOfBirth="ngModel"
-        name="year-of-birth"
-        id="year-of-birth"
-        required>
-        <option *ngFor="let year of years" [value]="year">{{year}}</option>
-      </select>
-      <div
-        *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')"
-        class="error-message">
-        Choose year of birth
-      </div>
-    </div>
-    <div class="form-field form-field--small">
-      <label for="passport">Passport Number</label>
-      <input
-        [(ngModel)]="userInfo.passport"
-        #passport="ngModel"
-        name="passport"
-        type="text"
-        id="passport"
-        placeholder="Provide Passport Data"
-        pattern="^[A-Z]{2}[0-9]{6}$"
-        [required]="isAdult">
-    </div>
-    <div
-      *ngIf="passport.hasError('required')"
-      class="error-message">
-      Required for adults
-    </div>
-  </div>
-  <fieldset ngModelGroup="address">
-    <legend>Address</legend>
-    <div class="form-field">
-      <label for="full-address">Full Address</label>
-      <input
-        [(ngModel)]="userInfo.fullAddress"
-        name="full-address"
-        type="text"
-        id="full-address"
-        placeholder="Street name and house number"
-        required>
-    </div>
-    <div class="form-field">
-      <label for="city">City</label>
-      <input
-        [(ngModel)]="userInfo.city"
-        name="city"
-        type="text"
-        id="city"
-        placeholder="City"
-        required>
-    </div>
-    <div class="form-field">
-      <label for="post-code">Post Code</label>
-      <input
-        [(ngModel)]="userInfo.postCode"
-        name="post-code"
-        type="number"
-        id="post-code"
-        placeholder="Post code"
-        required>
-    </div>
-  </fieldset>
+<!--    <div-->
+<!--      *ngIf="nickName.pending"-->
+<!--      class="info-message">-->
+<!--      Checking...-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="nickName.dirty && nickName.hasError('uniqueNameError')"-->
+<!--      class="error-message">-->
+<!--      Username is taken-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form-field">-->
+<!--    <label for="email">Email</label>-->
+<!--    <input-->
+<!--      [(ngModel)]="userInfo.email"-->
+<!--      #email="ngModel"-->
+<!--      name="email"-->
+<!--      type="email"-->
+<!--      id="email"-->
+<!--      placeholder="Provide your email"-->
+<!--      email>-->
+<!--    <div-->
+<!--      *ngIf="email.touched && email.hasError('email')"-->
+<!--      class="error-message">-->
+<!--      Invalid e-mail-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="form-field-inline-group">-->
+<!--    <div class="form-field form-field&#45;&#45;small">-->
+<!--      <label for="year-of-birth">Year of birth</label>-->
+<!--      <select-->
+<!--        [(ngModel)]="userInfo.yearOfBirth"-->
+<!--        #yearOfBirth="ngModel"-->
+<!--        name="year-of-birth"-->
+<!--        id="year-of-birth"-->
+<!--        required>-->
+<!--        <option *ngFor="let year of years" [value]="year">{{year}}</option>-->
+<!--      </select>-->
+<!--      <div-->
+<!--        *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')"-->
+<!--        class="error-message">-->
+<!--        Choose year of birth-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-field form-field&#45;&#45;small">-->
+<!--      <label for="passport">Passport Number</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.passport"-->
+<!--        #passport="ngModel"-->
+<!--        name="passport"-->
+<!--        type="text"-->
+<!--        id="passport"-->
+<!--        placeholder="Provide Passport Data"-->
+<!--        pattern="^[A-Z]{2}[0-9]{6}$"-->
+<!--        [required]="isAdult">-->
+<!--    </div>-->
+<!--    <div-->
+<!--      *ngIf="passport.hasError('required')"-->
+<!--      class="error-message">-->
+<!--      Required for adults-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <fieldset ngModelGroup="address">-->
+<!--    <legend>Address</legend>-->
+<!--    <div class="form-field">-->
+<!--      <label for="full-address">Full Address</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.fullAddress"-->
+<!--        name="full-address"-->
+<!--        type="text"-->
+<!--        id="full-address"-->
+<!--        placeholder="Street name and house number"-->
+<!--        required>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--      <label for="city">City</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.city"-->
+<!--        name="city"-->
+<!--        type="text"-->
+<!--        id="city"-->
+<!--        placeholder="City"-->
+<!--        required>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--      <label for="post-code">Post Code</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.postCode"-->
+<!--        name="post-code"-->
+<!--        type="number"-->
+<!--        id="post-code"-->
+<!--        placeholder="Post code"-->
+<!--        required>-->
+<!--    </div>-->
+<!--  </fieldset>-->
 
-  <fieldset appPasswordShouldMatch ngModelGroup="password">
-    <legend>Password</legend>
+<!--  <fieldset appPasswordShouldMatch ngModelGroup="password">-->
+<!--    <legend>Password</legend>-->
 
-    <div class="form-field">
-      <label for="password">Password</label>
-      <input
-        [(ngModel)]="userInfo.password"
-        #password="ngModel"
-        name="password"
-        type="password"
-        id="password"
-        placeholder="Enter password"
-        required
-        minlength="5">
+<!--    <div class="form-field">-->
+<!--      <label for="password">Password</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.password"-->
+<!--        #password="ngModel"-->
+<!--        name="password"-->
+<!--        type="password"-->
+<!--        id="password"-->
+<!--        placeholder="Enter password"-->
+<!--        required-->
+<!--        minlength="5">-->
 
-      <div
-        *ngIf="password.dirty && password.hasError('minlength')"
-        class="error-message">
-        Password must be at least {{ password.getError('minlength').requiredLength }} characters
-      </div>
-      <div
-        *ngIf="password.dirty && password.hasError('required')"
-        class="error-message">
-        Password required
-      </div>
-    </div>
+<!--      <div-->
+<!--        *ngIf="password.dirty && password.hasError('minlength')"-->
+<!--        class="error-message">-->
+<!--        Password must be at least {{ password.getError('minlength').requiredLength }} characters-->
+<!--      </div>-->
+<!--      <div-->
+<!--        *ngIf="password.dirty && password.hasError('required')"-->
+<!--        class="error-message">-->
+<!--        Password required-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="form-field">
-      <label for="confirm-password">Confirm password</label>
-      <input
-        [(ngModel)]="userInfo.confirmPassword"
-        #confirmPassword="ngModel"
-        name="confirm-password"
-        type="password"
-        id="confirm-password"
-        placeholder="Confirm password"
-        required
-        minlength="5">
+<!--    <div class="form-field">-->
+<!--      <label for="confirm-password">Confirm password</label>-->
+<!--      <input-->
+<!--        [(ngModel)]="userInfo.confirmPassword"-->
+<!--        #confirmPassword="ngModel"-->
+<!--        name="confirm-password"-->
+<!--        type="password"-->
+<!--        id="confirm-password"-->
+<!--        placeholder="Confirm password"-->
+<!--        required-->
+<!--        minlength="5">-->
 
-      <div
-        *ngIf="confirmPassword.dirty && confirmPassword.hasError('minlength')"
-        class="error-message">
-        Password must be at least {{ confirmPassword.getError('minlength').requiredLength }} characters
-      </div>
-      <div
-        *ngIf="confirmPassword.dirty && confirmPassword.hasError('required')"
-        class="error-message">
-        Confirm your password
-      </div>
-      <div
-        *ngIf="confirmPassword.dirty && confirmPassword.hasError('appPasswordShouldMatch')"
-        class="error-message">
-        Passwords doesn't match
-      </div>
-    </div>
-  </fieldset>
+<!--      <div-->
+<!--        *ngIf="confirmPassword.dirty && confirmPassword.hasError('minlength')"-->
+<!--        class="error-message">-->
+<!--        Password must be at least {{ confirmPassword.getError('minlength').requiredLength }} characters-->
+<!--      </div>-->
+<!--      <div-->
+<!--        *ngIf="confirmPassword.dirty && confirmPassword.hasError('required')"-->
+<!--        class="error-message">-->
+<!--        Confirm your password-->
+<!--      </div>-->
+<!--      <div-->
+<!--        *ngIf="confirmPassword.dirty && confirmPassword.hasError('appPasswordShouldMatch')"-->
+<!--        class="error-message">-->
+<!--        Passwords doesn't match-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </fieldset>-->
 
-  <button [disabled]="form.invalid || form.pending">Save</button>
-  <button type="reset">Reset</button>
-</form>
+<!--  <button [disabled]="form.invalid || form.pending">Save</button>-->
+<!--  <button type="reset">Reset</button>-->
+<!--</form>-->

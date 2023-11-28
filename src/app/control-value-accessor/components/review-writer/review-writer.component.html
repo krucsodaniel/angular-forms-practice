@@ -1,0 +1,11 @@
+<form class="container" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <h3>Rating picker</h3>
+
+  <app-rating-picker formControlName="reviewRating"></app-rating-picker>
+
+  <div contenteditable formControlName="reviewText"></div>
+
+  <div class="button-container">
+    <button class="save-button">Save</button>
+  </div>
+</form>
